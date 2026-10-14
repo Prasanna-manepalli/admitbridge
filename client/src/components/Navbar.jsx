@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { LogOut, GraduationCap } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // The consultancy area has its own white sidebar + top navigation,
+  // so hide the global dark navbar there only (other areas unchanged).
+  if (location.pathname.startsWith('/consultant')) return null;
 
   const handleLogout = () => {
     logout();

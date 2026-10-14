@@ -3,11 +3,17 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import { GoogleLogin } from '@react-oauth/google';
 
+// Demo account emails (editable via env). Emails only — passwords are never
+// shipped in frontend code; the demo passwords live in server/src/scripts/seed.js.
 const DEMO_ACCOUNTS = [
-  { label: 'Student', email: 'anu@gmail.com', password: 'password123', color: '#34d399', icon: '🎓' },
-  { label: 'Consultant', email: 'priya@consultancy.com', password: 'priya123', color: '#818cf8', icon: '💼' },
-  { label: 'Admin', email: 'admin@admitbridge.com', password: 'password123', color: '#fbbf24', icon: '🛡️' },
+  { label: 'Student', email: import.meta.env.VITE_DEMO_STUDENT_EMAIL || 'student@admitbridge.com', color: '#34d399', icon: '🎓' },
+  { label: 'Consultant', email: import.meta.env.VITE_DEMO_CONSULTANT_EMAIL || 'consultant@admitbridge.com', color: '#818cf8', icon: '💼' },
+  { label: 'Admin', email: import.meta.env.VITE_DEMO_ADMIN_EMAIL || 'admin@admitbridge.com', color: '#fbbf24', icon: '🛡️' },
 ];
+
+// Default email shown on the (shared) login form — the seeded demo consultant.
+// Editable like any other input; the password is always typed by the user.
+const DEFAULT_CONSULTANT_EMAIL = DEMO_ACCOUNTS[1].email;
 
 const ROLE_OPTIONS = [
   { value: 'student', label: 'Student', icon: '🎓' },
@@ -16,7 +22,7 @@ const ROLE_OPTIONS = [
 ];
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(DEFAULT_CONSULTANT_EMAIL);
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
@@ -35,7 +41,7 @@ const Login = () => {
 
   const handleDemoSelect = (account) => {
     setEmail(account.email);
-    setPassword(account.password);
+    setPassword('');
     setRole(account.label.toLowerCase());
     setError('');
   };
@@ -113,7 +119,7 @@ const Login = () => {
         <div style={{ marginTop: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', margin: '0.75rem 0 0.5rem' }}>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color, #334155)' }}></div>
-            <span style={{ margin: '0 0.75rem', color: 'var(--text-muted, #94a3b8)', fontSize: '0.8rem' }}>Quick fill demo credentials</span>
+            <span style={{ margin: '0 0.75rem', color: 'var(--text-muted, #94a3b8)', fontSize: '0.8rem' }}>Quick fill demo email</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color, #334155)' }}></div>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>

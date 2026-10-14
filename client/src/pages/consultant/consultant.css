@@ -1,0 +1,465 @@
+/* Consultancy area — light theme, scoped with the cns- prefix so student/admin pages are unaffected. */
+
+.cns-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #111827;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- Sidebar ---------- */
+.cns-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.cns-sidebar-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  padding: 0 0.75rem 0.75rem;
+}
+
+.cns-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.5rem;
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cns-nav-item:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.cns-nav-item.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.cns-sidebar-footer {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  padding: 0 0.75rem;
+}
+
+/* ---------- Top navigation ---------- */
+.cns-topbar {
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.cns-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+.cns-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  color: #fff;
+}
+
+.cns-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cns-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.cns-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ---------- Content ---------- */
+.cns-main {
+  flex: 1;
+  padding: 1.75rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cns-page-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.3rem;
+}
+
+.cns-page-sub {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0 0 1.5rem;
+}
+
+.cns-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cns-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---------- Stat cards ---------- */
+.cns-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cns-stat-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.cns-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cns-stat-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.cns-stat-label {
+  font-size: 0.78rem;
+  color: #6b7280;
+}
+
+/* ---------- Forms ---------- */
+.cns-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.cns-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.cns-field.full { grid-column: 1 / -1; }
+
+.cns-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cns-input,
+.cns-textarea,
+.cns-select {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #111827;
+  background: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cns-input:focus,
+.cns-textarea:focus,
+.cns-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.cns-textarea { min-height: 96px; resize: vertical; }
+
+/* ---------- Buttons ---------- */
+.cns-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.cns-btn-primary { background: #2563eb; color: #ffffff; }
+.cns-btn-primary:hover { background: #1d4ed8; }
+
+.cns-btn-outline { background: #ffffff; color: #374151; border: 1px solid #d1d5db; }
+.cns-btn-outline:hover { background: #f9fafb; border-color: #9ca3af; }
+
+/* ---------- Selectable chips / service cards ---------- */
+.cns-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cns-chip:hover { border-color: #2563eb; color: #2563eb; }
+
+.cns-chip.selected {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.cns-chip-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.cns-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.cns-service-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.1rem;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cns-service-card:hover { border-color: #93c5fd; }
+
+.cns-service-card.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+.cns-service-name { font-weight: 600; font-size: 0.92rem; color: #111827; display: flex; align-items: center; justify-content: space-between; }
+.cns-service-desc { font-size: 0.8rem; color: #6b7280; line-height: 1.4; }
+
+/* ---------- Badges ---------- */
+.cns-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.cns-badge-green { background: #dcfce7; color: #15803d; }
+.cns-badge-amber { background: #fef3c7; color: #b45309; }
+.cns-badge-blue  { background: #dbeafe; color: #1d4ed8; }
+.cns-badge-gray  { background: #f3f4f6; color: #4b5563; }
+
+/* ---------- Misc ---------- */
+.cns-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.8rem;
+  margin-bottom: 1.25rem;
+}
+
+.cns-save-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.cns-saved-msg { color: #15803d; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.cns-logo-upload {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cns-logo-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 0.75rem;
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  overflow: hidden;
+}
+
+.cns-logo-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Public preview profile header */
+.cns-preview-hero {
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  border-radius: 0.75rem 0.75rem 0 0;
+  padding: 2rem 1.75rem 3.5rem;
+  color: #ffffff;
+}
+
+.cns-preview-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.cns-preview-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.cns-preview-body { padding: 0 1.75rem 1.75rem; }
+
+/* ---------- Overrides for reused dark-theme components (scoped to consultant area only) ---------- */
+.cns-main .container { max-width: 100%; padding: 0; }
+.cns-main .dashboard-header { margin: 0 0 1.25rem; }
+.cns-main .dashboard-title { font-size: 1.15rem; color: #111827; }
+.cns-main .glass-panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.cns-main .glass-panel:hover { transform: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); }
+.cns-main .form-input {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+.cns-main .form-input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+.cns-main .form-label { color: #374151; }
+.cns-main .data-table th { color: #6b7280; border-bottom: 1px solid #e5e7eb; }
+.cns-main .data-table td { border-bottom: 1px solid #f3f4f6; color: #111827; }
+.cns-main .btn-secondary { background: #ffffff; color: #374151; border: 1px solid #d1d5db; }
+.cns-main .btn-secondary:hover { background: #f9fafb; }
+.cns-main .badge-safe { background: #dcfce7; color: #15803d; }
+.cns-main .badge-target { background: #fef3c7; color: #b45309; }
+.cns-main .badge-ambitious { background: #fee2e2; color: #b91c1c; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .cns-layout { flex-direction: column; }
+  .cns-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.75rem;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .cns-sidebar-title, .cns-sidebar-footer { display: none; }
+  .cns-stats { grid-template-columns: repeat(2, 1fr); }
+  .cns-service-grid { grid-template-columns: repeat(2, 1fr); }
+  .cns-form-grid { grid-template-columns: 1fr; }
+  .cns-main { padding: 1rem; }
+  .cns-topbar { position: static; }
+}
+
+@media (max-width: 560px) {
+  .cns-stats, .cns-service-grid { grid-template-columns: 1fr; }
+  .cns-user-chip span { display: none; }
+}

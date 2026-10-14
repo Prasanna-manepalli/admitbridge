@@ -8,7 +8,13 @@ import StudentProfile from './pages/student/StudentProfile';
 import StudentApplications from './pages/student/StudentApplications';
 import UniversityList from './pages/universities/UniversityList';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import ConsultantDashboard from './pages/consultant/ConsultantDashboard';
+import ConsultantLayout from './pages/consultant/ConsultantLayout';
+import { ConsultantProvider } from './pages/consultant/ConsultantContext';
+import Dashboard from './pages/consultant/Dashboard';
+import MyProfile from './pages/consultant/MyProfile';
+import Services from './pages/consultant/Services';
+import PublicProfilePreview from './pages/consultant/PublicProfilePreview';
+import AccountSettings from './pages/consultant/AccountSettings';
 import Navbar from './components/Navbar';
 
 // Protected Route Component
@@ -74,11 +80,20 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/consultant/dashboard" element={
+          <Route path="/consultant" element={
             <ProtectedRoute allowedRoles={['consultant', 'admin']}>
-              <ConsultantDashboard />
+              <ConsultantProvider>
+                <ConsultantLayout />
+              </ConsultantProvider>
             </ProtectedRoute>
-          } />
+          }>
+            <Route index element={<Navigate to="/consultant/dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="profile" element={<MyProfile />} />
+            <Route path="services" element={<Services />} />
+            <Route path="public-preview" element={<PublicProfilePreview />} />
+            <Route path="settings" element={<AccountSettings />} />
+          </Route>
 
           <Route path="/admin/dashboard" element={
             <ProtectedRoute allowedRoles={['admin']}>

@@ -20,7 +20,7 @@ const formatDate = (d) => {
   return new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 };
 
-const ConsultantDashboard = () => {
+const ConsultantDashboard = ({ embedded = false }) => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -62,12 +62,12 @@ const ConsultantDashboard = () => {
   };
 
   if (loading) {
-    return <div className="container" style={{ paddingTop: '2rem' }}>Loading dashboard...</div>;
+    return <div className="container" style={embedded ? {} : { paddingTop: '2rem' }}>Loading dashboard...</div>;
   }
 
   if (error) {
     return (
-      <div className="container" style={{ paddingTop: '2rem' }}>
+      <div className="container" style={embedded ? {} : { paddingTop: '2rem' }}>
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem' }}>
           <Briefcase size={48} style={{ color: 'var(--primary)', opacity: 0.5, marginBottom: '1rem' }} />
           <h3>{error}</h3>
@@ -83,12 +83,14 @@ const ConsultantDashboard = () => {
 
   return (
     <div className="container">
-      <div className="dashboard-header">
-        <div>
-          <h1 className="dashboard-title">Consultant Dashboard</h1>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Welcome back, {user.name}!</p>
+      {!embedded && (
+        <div className="dashboard-header">
+          <div>
+            <h1 className="dashboard-title">Consultant Dashboard</h1>
+            <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>Welcome back, {user.name}!</p>
+          </div>
         </div>
-      </div>
+      )}
 
       {(statusMessage || statusError) && (
         <div className="glass-panel" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', marginBottom: '1.5rem', color: statusError ? '#f87171' : '#34d399' }}>

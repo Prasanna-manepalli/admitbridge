@@ -8,9 +8,11 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     role: 'student'
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const { register, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -20,9 +22,35 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+
+    // Client-side validation before hitting the API
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim());
+    if (!formData.name.trim() || !emailOk) {
+      setError('Please enter your name and a valid email address.');
+      return;
+    }
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long.');
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
     try {
-      await register(formData);
-      navigate('/');
+      // Only send what the API expects (no confirmPassword)
+      await register({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        password: formData.password,
+        role: formData.role,
+      });
+      setSuccess('Account created! Redirecting you to your dashboard...');
+      // Same design as login: land on "/" and let HomeDirector route by role
+      // (consultants go to /consultant/dashboard, students to theirs, etc.)
+      setTimeout(() => navigate('/'), 900);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     }
@@ -35,6 +63,7 @@ const Register = () => {
         <p className="auth-subtitle">Join AdmitBridge today</p>
         
         {error && <div style={{color: '#f87171', marginBottom: '1rem', textAlign: 'center'}}>{error}</div>}
+        {success && <div style={{color: '#34d399', marginBottom: '1rem', textAlign: 'center'}}>{success}</div>}
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -58,15 +87,29 @@ const Register = () => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className="form-group">
+          </div>          <div className="form-group">
             <label className="form-label">Password</label>
             <input 
-              type="password" 
+              type="password"
               name="password"
               className="form-input" 
               value={formData.password}
               onChange={handleChange}
+              minLength={6}
+              autoComplete="new-password"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Confirm Password</label>
+            <input 
+              type="password"
+              name="confirmPassword"
+              className="form-input" 
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              minLength={6}
+              autoComplete="new-password"
               required
             />
           </div>
