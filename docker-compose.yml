@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  # --- MongoDB ---
+  mongodb:
+    image: mongo:7
+    container_name: admitbridge-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  # --- Express API Server ---
+  server:
+    build: ./server
+    container_name: admitbridge-server
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - MONGODB_URI=mongodb://mongodb:27017/admitbridge
+      - JWT_SECRET=admitbridge-secret-change-in-production
+      - ML_SERVICE_URL=http://ml:8000
+    depends_on:
+      - mongodb
+      - ml
+    restart: unless-stopped
+
+  # --- ML Prediction Service ---
+  ml:
+    build: ./ml
+    container_name: admitbridge-ml
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # --- Frontend (Vite + Nginx) ---
+  client:
+    build:
+      context: ./client
+      args:
+        - VITE_API_URL=http://localhost:5001/api
+    container_name: admitbridge-client
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  mongo-data:

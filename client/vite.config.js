@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       // Forward API calls to the Express server during development
-      '/api': 'http://localhost:5001',
+      // (PORT is honored so an overridden API port stays consistent)
+      '/api': `http://localhost:${process.env.PORT || 5001}`,
     },
   },
 })

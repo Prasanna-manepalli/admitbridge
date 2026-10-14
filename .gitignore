@@ -1,0 +1,22 @@
+# OS junk
+.DS_Store
+
+# Freebuff tool runtime state (app db, logs, helper scripts)
+.freebuff/
+
+# Service runtime output from run-once.sh / stop.sh
+.logs/
+.run/
+
+# Stale ML virtualenv backup (26 MB, 1000+ files)
+ml/venv.stale.bak/
+
+# Secrets — never commit
+.env
+.env.local
+
+# Dependencies / build output (also covered by nested .gitignores)
+node_modules/
+dist/
+__pycache__/
+*.pyc
